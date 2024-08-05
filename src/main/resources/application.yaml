@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: Ajudae
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/AJUDAE
+    username: postgres
+    password: 20214341
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 3
+      minimum-idle: 2
+      idle-timeout: 20000
+      poolName: Ajudae
