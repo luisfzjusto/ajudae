@@ -108,6 +108,10 @@ public class ProjetoService {
         Conta contaProjeto = projeto.getConta();
         Conta contaCriador = projeto.getUsuario().getConta();
 
+        if(contaUsuario.getSaldo() < valor){
+            throw new RuntimeException("Saldo insuficiente para apoiar esse projeto. Consulte seu saldo.");
+        }
+
         contaDAO.apoiarProjeto(contaUsuario.getId(), contaProjeto.getId(), valor);
 
         contaDAO.transferir(contaProjeto.getId(), contaCriador.getId(), valor);

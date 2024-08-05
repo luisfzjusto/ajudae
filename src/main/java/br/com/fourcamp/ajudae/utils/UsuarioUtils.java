@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
 public class UsuarioUtils {
 
     public static void validarNome(String nome){
-        if (!Pattern.matches("^[a-zA-Z\\s]{10,}$", nome)){
+        if (!Pattern.matches("^[\\p{L}\\s]{10,}$", nome)){
             throw new ValidationException("O nome deve conter apenas letras e deve possuir, no mínimo, 10 caracteres.");
         }
     }

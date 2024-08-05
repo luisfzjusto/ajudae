@@ -73,8 +73,14 @@ public class ContaDAO {
     }
 
     public void sacar(Long contaId, Double valor){
-        String sql = "UPDATE conta SET saldo = saldo - ? WHERE id = ?";
-        jdbcTemplate.update(sql, valor, contaId);
+        String sqlSelect = "SELECT saldo FROM conta WHERE id = ?";
+        Double saldoAtual = jdbcTemplate.queryForObject(sqlSelect, new Object[]{contaId}, Double.class);
+        if (saldoAtual < valor){
+            throw new RuntimeException("Saldo insuficiente para saque.");
+        }
+
+        String sqlUpdate = "UPDATE conta SET saldo = saldo - ? WHERE id = ?";
+        jdbcTemplate.update(sqlUpdate, valor, contaId);
     }
 
     @Transactional
